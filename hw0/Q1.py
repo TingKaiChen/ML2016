@@ -1,4 +1,5 @@
 import sys
+import numpy
 
 colNum = int(sys.argv[1])
 infile = sys.argv[2]
@@ -6,18 +7,14 @@ outfile = "ans1.txt"
 table = []
 
 # File input
-with open(infile, 'r') as data:
-	rows = data.readlines()
-	for row in rows:
-		numlist = map(float, row.strip().split(' '))
-		table.append(numlist)
+data = numpy.loadtxt(infile)
 
 # Extract specific column
-col = [nums[colNum] for nums in table]
+col = data[:, colNum]
 
 # Sort the column
-col.sort()
+sortCol = numpy.sort(col)
 
 # File output
 with open(outfile, 'w') as outputFile:
-	outputFile.write(','.join(map(str, col)))
+	outputFile.write(','.join(map(str, sortCol)))
