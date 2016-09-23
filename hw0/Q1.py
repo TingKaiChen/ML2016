@@ -13,9 +13,7 @@ with open(infile, 'r') as data:
 		table.append(numlist)
 
 # Extract specific column
-col = []
-for nums in table:
-	col.append(nums[colNum])
+col = [nums[colNum] for nums in table]
 
 # Sort the column
 col.sort()
