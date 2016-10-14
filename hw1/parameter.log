@@ -1,0 +1,48 @@
+iter: 300 eta: 10 avgLoss: 9.13652356757
+iter: 6000 eta: 0.01 avgLoss: 7.65414723588
+iter: 6000 eta: 0.01 avgLoss: 7.65414723588
+iter: 6000 eta: 0.01 avgLoss: 7.65414723588
+data: 5652
+iter: 6000 eta: 0.01 avgLoss: 6.24755901872
+iter: 6000 eta: 0.1 avgLoss: 6.10373971257
+iter: 6000 eta: 1 avgLoss: 6.11734948036
+iter: 6000 eta: 0.5 avgLoss: 6.11560113375
+iter: 10000 eta: 0.5 avgLoss: 5.98791644614
+iter: 100000 eta: 0.5 avgLoss: 5.87137404647
+iter: 100000 eta: 0.7 avgLoss: 5.87132686719
+iter: 10000 eta: 0.7 avgLoss: 5.98856133396
+iter: 10000 eta: 1 avgLoss: 5.98905209961
+iter: 10000 eta: 1.2 avgLoss: 5.98924459662
+iter: 10000 eta: 0.8 avgLoss: 5.98876508002
+iter: 10000 eta: 8 avgLoss: 5.99007298007
+iter: 10000 eta: 0.75 avgLoss: 5.98866986704
+iter: 100000 eta: 0.7 avgLoss: 5.87132686719 (best)
+# lam: 0~100000		not efficient
+test: 5.98856133396 train: 5.85222989958 iter: 10000 eta: 0.7 lam: 0
+test: 5.98856485473 train: 5.85224057106 iter: 10000 eta: 0.7 lam: 1
+test: 5.98859673176 train: 5.85233653939 iter: 10000 eta: 0.7 lam: 10
+test: 5.98893165025 train: 5.85328772215 iter: 10000 eta: 0.7 lam: 100
+test: 5.99273577211 train: 5.86172034676 iter: 10000 eta: 0.7 lam: 1000
+test: 6.03041998709 train: 5.91671524675 iter: 10000 eta: 0.7 lam: 10000
+test: 6.49135724659 train: 6.4068650857 iter: 10000 eta: 0.7 lam: 100000
+
+# 2nd order
+test: 7.75363823398 train: 7.43934569025 iter: 10000 eta: 0.7 lam: 0
+# 3rd order
+test: 12.7334763009 train: 10.2229073789 iter: 10000 eta: 0.7 lam: 0
+test: 12.7334763256 train: 10.2229074158 iter: 10000 eta: 1 lam: 0
+# 4th order
+test: 23.0331855949 train: 12.6769834435 iter: 10000 eta: 1 lam: 0
+
+test: 5.98856133396 train: 5.85222989958 iter: 10000 eta: 0.7 lam: 0
+test: 5.87132686719 train: 5.66477981163 iter: 100000 eta: 0.7 lam: 0
+# Feature scaling
+test: 5.92666504419 train: 5.63491576077 iter: 10000 eta: 0.7 lam: 0
+test: 5.9266613691 train: 5.63497031801 iter: 10000 eta: 0.8 lam: 0
+test: 5.93660106802 train: 5.63112108055 iter: 100000 eta: 0.7 lam: 0
+test: 5.91956582232 train: 5.63518419906 iter: 2000000 eta: 0.7 lam: 0
+test: 5.87131208814 train: 5.66479006927 iter: 100000 eta: 0.8 lam: 0
+test: 5.87130058173 train: 5.66479805575 iter: 100000 eta: 0.9 lam: 0
+test: 5.87127753862 train: 5.66481405051 iter: 100000 eta: 1.2 lam: 0
+test: 5.93641377295 train: 5.63112622598 iter: 100000 eta: 1.2 lam: 0
+test: 5.87132686719 train: 5.66477981163 iter: 100000 eta: 0.7 lam: 0
