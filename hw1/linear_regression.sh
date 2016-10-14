@@ -1,2 +1,2 @@
 #!/bin/bash
-python LinearRegression.py
+python LinearRegression.py LR
