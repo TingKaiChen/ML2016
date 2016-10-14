@@ -26,6 +26,10 @@ for mon in range(1, 12):
 	out_vec = mat_in_tmp[9, 480*mon+9:480*mon+480][np.newaxis].T
 	train_out = np.concatenate((train_out, out_vec), axis=0)
 
+# Overfitting
+# train_in = train_in[:276, :]
+# train_out = train_out[:276, 0][np.newaxis].T
+
 # multiple order
 # train_in = np.concatenate((train_in, train_in**2, train_in**3, train_in**4), axis=1)
 
@@ -49,14 +53,14 @@ nf_test_out_2 = train_out[0::3, 0][np.newaxis].T
 nf_test_out_3 = train_out[1::3, 0][np.newaxis].T
 
 ### Model parameter ###
-# eta = 0.00000000296		# Learning rate for pure LR
+# eta = 0.00000000009		# Learning rate for pure LR
 eta = 0.7		# Learning rate
 w1 = np.zeros((162, 1))	# weightings
 w2 = np.zeros((162, 1))
 w3 = np.zeros((162, 1))
 w = np.zeros((162, 1))
 bias = 0
-iteration = 100000		# Iteration times
+iteration = 10000		# Iteration times
 lam = 0
 useAdagrad = True
 
@@ -116,7 +120,12 @@ for i in range(1, 240):
 test_out = model1_all.testing_output(test_in)
 
 # Output file
-with open('linear_regression.csv', 'w+') as outfile:
+filename = ''
+if sys.argv[1] == 'LR':
+	filename = 'linear_regression.csv'
+else:
+	filename = 'kaggle_best.csv'
+with open(filename, 'w+') as outfile:
 	outfile.write('id,value\n')
 	for i in range(240):
 		outfile.write('id_'+str(i)+','+str(test_out[i, 0])+'\n')
