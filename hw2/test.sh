@@ -1,2 +1,2 @@
 #!/bin/bash
-python logistic_regression.py $1 $2 $3
+python generative_model.py $1 $2 $3
