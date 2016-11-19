@@ -143,15 +143,15 @@ if '-train' in sys.argv:
 			model.fit(cv_train, cv_out, batch_size=100, nb_epoch=10, sample_weight=sampleW)
 		model.save('trained_model')
 
-model = load_model('trained_model')
-### Prediction ###
-testdata = np.zeros((10000, 3, 32, 32))
-for i in xrange(10000):
-	testdata[i, :, :, :] = test[i].reshape((3, 32, 32))
+	model = load_model('trained_model')
+	### Prediction ###
+	testdata = np.zeros((10000, 3, 32, 32))
+	for i in xrange(10000):
+		testdata[i, :, :, :] = test[i].reshape((3, 32, 32))
 
-testout = model.predict(testdata)
-testout = np.argmax(testout, axis = 1)
-np.save('testout', testout)
+	testout = model.predict(testdata)
+	testout = np.argmax(testout, axis = 1)
+	np.save('testout', testout)
 
 
 if '-test' in sys.argv:
