@@ -180,12 +180,12 @@ if '-train' in sys.argv:
 	else:
 		model = load_model('trained_model')
 
-### Prediction ###
-testdata = test.reshape((10000, 3, 32, 32))
+	### Prediction ###
+	testdata = test.reshape((10000, 3, 32, 32))
 
-testout = model.predict(testdata)
-testout = np.argmax(testout, axis = 1)
-np.save('testout', testout)
+	testout = model.predict(testdata)
+	testout = np.argmax(testout, axis = 1)
+	np.save('testout', testout)
 
 if '-test' in sys.argv:
 	testout = np.load('testout.npy')
