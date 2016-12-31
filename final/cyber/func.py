@@ -4,7 +4,7 @@ import csv
 
 nb_train = 4408587
 nb_test = 606779
-dim = 41
+dim = 41+2+69+10    #len(dim_1)+len(dim_2)+len(dim_3)+others
 types = {'normal' : 0, 'dos' : 1, 'u2r' : 2, 'r2l' : 3, 'probe' : 4}
 
 def read_train(train_file):
@@ -13,12 +13,12 @@ def read_train(train_file):
     y = np.zeros((nb_train,))
 
     idx = 0
-    dim_1 = {}
-    dim_2 = {}
-    dim_3 = {}
-    dim_1c = 0.0
-    dim_2c = 0.0
-    dim_3c = 0.0
+    dim_1 = {}      # len(dim_1) == 3
+    dim_2 = {}      # len(dim_2) == 70
+    dim_3 = {}      # len(dim_3) == 11
+    dim_1c = 0
+    dim_2c = 0
+    dim_3c = 0
 
     maptype = {}
     maptypec = 0
@@ -31,22 +31,22 @@ def read_train(train_file):
 
             for i in xrange(len(data)-1):
                 if i == 1:
-                    if not data[i] in dim_1:
+                    if not data[1] in dim_1:
                         dim_1[data[i]] = dim_1c
-                        dim_1c += 1.0
-                    X[idx, i] = dim_1[data[i]]
+                        dim_1c += 1
+                    X[idx, 1+dim_1[data[i]]] = 1
                 elif i == 2:
-                    if not data[i] in dim_2:
+                    if not data[2] in dim_2:
                         dim_2[data[i]] = dim_2c
-                        dim_2c += 1.0
-                    X[idx, i] = dim_2[data[i]]
+                        dim_2c += 1
+                    X[idx, 4+dim_2[data[i]]] = 1
                 elif i == 3:
-                    if not data[i] in dim_3:
+                    if not data[3] in dim_3:
                         dim_3[data[i]] = dim_3c
-                        dim_3c += 1.0
-                    X[idx, i] = dim_3[data[i]]
+                        dim_3c += 1
+                    X[idx, 74+dim_3[data[i]]] = 1
                 else:
-                    X[idx, i] = float(data[i])
+                    X[idx, i+81] = float(data[i])
 
             '''
             if not data[-1] in maptype:
@@ -70,18 +70,19 @@ def read_test(test_file, dim_1, dim_2, dim_3):
             data = data.split(',')
             for i in xrange(len(data)):
                 if i == 1:
-                    X[idx, i] = dim_1[data[i]]
+                    X[idx, 1+dim_1[data[i]]] = 1
                 elif i == 2:
                     if not data[i] in dim_2:
                         dim_2[data[i]] = max(dim_2.values())+1
-                    X[idx, i] = dim_2[data[i]]
+                        # 'icmp' not exist in training data
+                        dim_2[data[i]] -= 1
+                    X[idx, 4+dim_2[data[i]]] = 1
                 elif i == 3:
-                    X[idx, i] = dim_3[data[i]]
+                    X[idx, 74+dim_3[data[i]]] = 1
                 else:
-                    X[idx, i] = float(data[i])
+                    X[idx, i+81] = float(data[i])
 
             idx += 1
-
     return X
 
 def read_label():
@@ -102,4 +103,15 @@ def write_pred(pred_file, pred):
         for i in xrange(len(pred)):
             wr.writerow([i+1, int(pred[i])])
 
+if __name__ == '__main__':
+    # nb_train = 13
+    print 'Reading Data'
+    train_file = 'train'
+    test_file = 'test.in'
+    output = 'rf.csv'
+
+    X, y, dim_1, dim_2, dim_3, maptype = read_train(train_file)
+
+    X_test = read_test(test_file, dim_1, dim_2, dim_3)
+    
 
