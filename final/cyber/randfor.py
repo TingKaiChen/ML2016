@@ -22,7 +22,7 @@ tensorflow.python.control_flow_ops = control_flow_ops
 print 'Reading Data'
 train_file = 'train'
 test_file = 'test.in'
-output = 'rf.csv'
+output = 'rf1.csv'
 
 X, y, dim_1, dim_2, dim_3, maptype = read_train(train_file)
 
@@ -55,6 +55,10 @@ print clf.score(X, y)
 
 print 'Predicting'
 pred = clf.predict(X_test)
+prob = clf.predict_proba(X_test)
+for i in xrange(len(pred)):
+	if prob[i,2] != 0.0:
+		pred[i] = 2
 write_pred(output, pred)
 
 '''
