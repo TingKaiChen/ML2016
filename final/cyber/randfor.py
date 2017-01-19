@@ -7,6 +7,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.feature_selection import chi2
 from sklearn.feature_selection import SelectKBest
 from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.tree import DecisionTreeClassifier
 '''
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation
@@ -23,6 +24,8 @@ print 'Reading Data'
 train_file = 'train'
 test_file = 'test.in'
 output = 'rf1.csv'
+mf = 'sqrt'
+md = 3
 
 X, y, dim_1, dim_2, dim_3, maptype = read_train(train_file)
 
@@ -40,10 +43,16 @@ X_test = read_test(test_file, dim_1, dim_2, dim_3)
 #X = X[:, :40]
 #X_test = X_test[:, :40]
 
-print 'Training'
+print 'Tree Training'
+treeCLF = DecisionTreeClassifier(random_state=0, max_features=mf, max_depth=md)
+scores = cross_val_score(treeCLF, X, y, cv=5)
+print scores
+print np.mean(scores)
+
+print 'Forest Training'
 #X = SelectKBest(chi2, k=35).fit_transform(X, y)
 #clf = GradientBoostingClassifier(n_estimators=25, learning_rate=1.0, random_state=0)
-clf = RandomForestClassifier(n_estimators=25, criterion='gini', max_features=40, warm_start=True)
+clf = RandomForestClassifier(random_state=0, n_estimators=25, criterion='gini', max_features=mf, warm_start=True, max_depth=md)
 
 scores = cross_val_score(clf, X, y, cv=5)
 print scores
