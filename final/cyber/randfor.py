@@ -24,8 +24,8 @@ print 'Reading Data'
 train_file = 'train'
 test_file = 'test.in'
 output = 'rf1.csv'
-mf = 'sqrt'
-md = 3
+mf = 10
+md = 5
 
 X, y, dim_1, dim_2, dim_3, maptype = read_train(train_file)
 
@@ -45,18 +45,18 @@ X_test = read_test(test_file, dim_1, dim_2, dim_3)
 
 print 'Tree Training'
 treeCLF = DecisionTreeClassifier(random_state=0, max_features=mf, max_depth=md)
-scores = cross_val_score(treeCLF, X, y, cv=5)
+scores = cross_val_score(treeCLF, X, y, cv=3)
 print scores
 print np.mean(scores)
 
-print 'Forest Training'
-#X = SelectKBest(chi2, k=35).fit_transform(X, y)
-#clf = GradientBoostingClassifier(n_estimators=25, learning_rate=1.0, random_state=0)
-clf = RandomForestClassifier(random_state=0, n_estimators=25, criterion='gini', max_features=mf, warm_start=True, max_depth=md)
+# print 'Forest Training'
+# #X = SelectKBest(chi2, k=35).fit_transform(X, y)
+# #clf = GradientBoostingClassifier(n_estimators=25, learning_rate=1.0, random_state=0)
+# clf = RandomForestClassifier(random_state=0, n_estimators=25, criterion='gini', max_features=mf, warm_start=True, max_depth=md)
 
-scores = cross_val_score(clf, X, y, cv=5)
-print scores
-print np.mean(scores)
+# scores = cross_val_score(clf, X, y, cv=5)
+# print scores
+# print np.mean(scores)
 
 # clf.fit(X, y)
 # print clf.score(X, y)
