@@ -45,9 +45,11 @@ X_test = read_test(test_file, dim_1, dim_2, dim_3)
 
 print 'Tree Training'
 treeCLF = DecisionTreeClassifier(random_state=0, max_features=mf, max_depth=md)
-scores = cross_val_score(treeCLF, X, y, cv=3)
-print scores
-print np.mean(scores)
+# scores = cross_val_score(treeCLF, X, y, cv=3)
+# print scores
+# print np.mean(scores)
+treeCLF.fit(X, y)
+print treeCLF.score(X, y)
 
 # print 'Forest Training'
 # #X = SelectKBest(chi2, k=35).fit_transform(X, y)
